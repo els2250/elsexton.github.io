@@ -5,10 +5,15 @@ output:
     toc: true
     toc_float: true
 ---
-<center>
-![](images/emma_hiking.jpg)
-</center>
+\n
 
 ### Introduction
 
 
+
+```{r, out.width = "400px", echo = FALSE, fig.align = 'center'}
+knitr::include_graphics("images/emma_hiking.jpg")
+```
+<center>
+Hiking in the Swiss Alps, 2017
+</center>
