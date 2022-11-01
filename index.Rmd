@@ -5,6 +5,10 @@ output:
     toc: true
     toc_float: true
 ---
+<center>
+![](images/emma_hiking.jpg)
+</center>
 
 ### Introduction
+
 
