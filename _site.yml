@@ -5,6 +5,8 @@ navbar:
   right:
     - text: "Resume"
       href: experience.html
+    - text: "Problem 2 - Flexdashboard"
+      href: flexdashboard.html
     - icon: fa-envelope fa-lg
       href: mailto:<els2250@cumc.columbia.edu>
     - icon: fa-brands fa-linkedin
