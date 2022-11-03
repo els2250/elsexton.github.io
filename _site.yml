@@ -6,7 +6,7 @@ navbar:
     - text: "Resume"
       href: experience.html
     - text: "Dashboard"
-      href: flexdashboard.html
+      href: dashboard.html
     - icon: fa-envelope fa-lg
       href: mailto:<els2250@cumc.columbia.edu>
     - icon: fa-brands fa-linkedin
