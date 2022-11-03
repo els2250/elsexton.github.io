@@ -1,0 +1,81 @@
+---
+title: "Dashboard for NYC Restaurant Inspections"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(p8105.datasets)
+library(flexdashboard)
+library(plotly)
+
+data(rest_inspec)
+
+nyc_inspections <-
+  rest_inspec %>%
+  sample_n(5000)
+```
+
+Column {data-width=550}
+-----------------------------------------------------------------------
+
+### Restaurant Inspection Grades - Scatter Plot
+
+```{r}
+nyc_inspections %>% 
+  mutate(
+    text_label = str_c("Restaurant: ", dba, 
+                       "\nBorough: ", boro,
+                       "\nViolation: ", violation_description)
+  ) %>% 
+  drop_na(grade) %>% 
+  plot_ly( 
+    x = ~inspection_date, 
+    y = ~score, 
+    color = ~grade, 
+    colors = "viridis",
+    type = "scatter", 
+    mode = "markers",
+    alpha = .4, 
+    text = ~text_label
+  )
+```
+
+
+Column {data-width=450}
+-----------------------------------------------------------------------
+
+### Restaurant Inspection Scores by Borough - Box Plot
+
+```{r}
+nyc_inspections %>% 
+  filter(boro != "Missing") %>% 
+  mutate(boro = fct_reorder(boro, score)) %>% 
+  plot_ly(
+    y = ~score, 
+    color = ~boro, 
+    type = "box", 
+    colors = "viridis"
+  )
+```
+
+### Number of Critical Flags by Borough - Bar Chart
+
+```{r}
+nyc_inspections %>% 
+  group_by(boro) %>% 
+  filter(boro != "Missing") %>% 
+  count(critical_flag) %>% 
+  ungroup() %>% 
+  mutate(boro = fct_reorder(boro, -n),
+         critical_flag = fct_reorder(critical_flag, -n)) %>% 
+  plot_ly(
+    x = ~boro, 
+    y = ~n,
+    color = ~critical_flag,
+    colors = "viridis",
+    type = "bar")
+```
